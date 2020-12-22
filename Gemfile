@@ -25,6 +25,10 @@ gem 'jbuilder', '~> 2.7'
 #authentication gem
 gem 'devise'
 
+#video upload
+gem 'carrierwave'
+gem 'carrierwave-video'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
