@@ -1,5 +1,6 @@
 class VideosController < ApplicationController
   before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user! , except: [:show, :index]
 
   # GET /videos
   # GET /videos.json
@@ -26,7 +27,7 @@ class VideosController < ApplicationController
   def create
     @video = Video.new(video_params)
     @video.user=current_user
-    
+
     respond_to do |format|
       if @video.save
         format.html { redirect_to @video, notice: 'Video was successfully created.' }
