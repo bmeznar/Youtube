@@ -8,13 +8,14 @@
 </p>
 
 <p>
+  <%= @video.user.email %><br>
   <strong>Description:</strong>
   <%= @video.description %>
 </p>
 <hr>
 <div class="comments">
-  <h3>Add new comment</h3>
-  <%= render 'comments/form', Comment: @comment %>
+  <h3>Comments</h3>
+  <%= render 'comments/form', comment: @comment %>
 </div>
 
 <%= link_to 'Edit', edit_video_path(@video) %> |

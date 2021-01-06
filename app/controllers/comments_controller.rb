@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
-    @comment.user = current_user
+    #@comment.user = current_user
     #@comment.video = :id
 
     respond_to do |format|
