@@ -24,7 +24,8 @@ gem 'jbuilder', '~> 2.7'
 
 #authentication gem
 gem 'devise'
-
+#commontator
+gem 'commontator'
 #video upload
 gem 'carrierwave'
 gem 'carrierwave-video'

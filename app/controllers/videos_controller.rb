@@ -11,6 +11,7 @@ class VideosController < ApplicationController
   # GET /videos/1
   # GET /videos/1.json
   def show
+    commontator_thread_show(@video)
   end
 
   # GET /videos/new
