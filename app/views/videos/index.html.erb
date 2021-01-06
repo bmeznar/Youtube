@@ -1,31 +1,30 @@
 <h1>Videos</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th></th>
-      <th>Video</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
 
   <tbody>
     <% @videos.each do |video| %>
-      <tr>
-        <td><%= video.title %></td>
-        <td><%= image_tag video.thumbnail %></td>
-        <td><%= time_ago_in_words(video.created_at) %> ago</td>
-        <td><%= video.description %></td>
-        <td><%= link_to 'Show', video %></td>
-        <td><%= link_to 'Edit', edit_video_path(video) %></td>
-        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="card mb-4 box-shadow">
+            <%= image_tag video.thumbnail, :class => "card-img-top"%>
+            <div class="card-body">
+              <p class="card-text" style="font-size:1.3em;"><%= video.title %></p>
+              <p class="card-text" style="font-weight:300;"><%= video.user.name %></p>
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                  <%= link_to 'Watch', video, :class => "btn btn-sm btn-outline-secondary" %>
+                </div>
+                <small class="text-muted"><%= time_ago_in_words(video.created_at) %> ago</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+        <!-- <td><%#= video.description %></td>
+        <td><%#= link_to 'Show', video %></td>
+        <td><%#= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%#= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
     <% end %>
   </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Video', new_video_path %>
