@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_video, only: [:show, :edit, :update, :destroy, :like, :dislike]
   before_action :authenticate_user! , except: [:show, :index]
 
   # GET /videos
@@ -61,6 +61,28 @@ class VideosController < ApplicationController
     respond_to do |format|
       format.html { redirect_to videos_url, notice: 'Video was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  #LIKE/DISLIKE
+  #liking video
+  def like
+    if current_user.voted_up_on? @video
+      @video.unliked_by current_user
+      redirect_to video_path
+    else
+      @video.liked_by current_user
+      redirect_to video_path
+    end
+  end
+  #disliking video
+  def dislike
+    if current_user.voted_down_on? @video
+      @video.undisliked_by current_user
+      redirect_to video_path
+    else
+      @video.disliked_by current_user
+      redirect_to video_path
     end
   end
 

@@ -7,6 +7,21 @@
   <video controls width="640" height="480" src="<%= @video.video %>"></video>
 </p>
 
+<div class="like">
+  <%= link_to like_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
+    <button type="button" name="button">
+      <span class="glyphicon glyphicon-thumbs-up"></span>
+      <span><%= @video.get_likes.size %></span>
+    </button>
+  <% end %>
+  <%= link_to dislike_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
+    <button type="button" name="button">
+      <span class="glyphicon glyphicon-thumbs-down"></span>
+      <span><%= @video.get_dislikes.size %></span>
+    </button>
+  <% end %>
+</div>
+
 <p>
   <%= @video.user.name %><br>
   <strong>Description:</strong>

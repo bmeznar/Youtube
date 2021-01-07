@@ -7,4 +7,6 @@ class User < ApplicationRecord
   has_many :videos, dependent: :destroy
 
   acts_as_commontator
+
+  acts_as_voter
 end

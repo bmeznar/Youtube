@@ -6,4 +6,6 @@ class Video < ApplicationRecord
   has_one_attached :thumbnail
 
   acts_as_commontable dependent: :destroy
+
+  acts_as_votable dependent: :destroy
 end

@@ -26,6 +26,8 @@ gem 'jbuilder', '~> 2.7'
 gem 'devise'
 #commontator
 gem 'commontator'
+#like/dislike
+gem 'acts_as_votable'
 #video upload
 gem 'carrierwave'
 gem 'carrierwave-video'
