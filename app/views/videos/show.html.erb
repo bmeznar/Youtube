@@ -18,12 +18,26 @@
       <p><%= @video.description %></p>
 
       <div class="like">
-        <%= link_to like_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
-            👍 <%= @video.get_likes.size %>
+        <% if current_user.voted_up_on? @video %>
+          <%= link_to like_video_path(@video), :class=>"btn btn-secondary", method: :put do %>
+              👍 <%= @video.get_likes.size %>
+          <% end %>
+        <% else %>
+          <%= link_to like_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
+              👍 <%= @video.get_likes.size %>
+          <% end %>
         <% end %>
-        <%= link_to dislike_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
-            👎 <%= @video.get_dislikes.size %>
+
+        <% if current_user.voted_down_on? @video %>
+          <%= link_to dislike_video_path(@video), :class=>"btn btn-secondary", method: :put do %>
+              👎 <%= @video.get_dislikes.size %>
+          <% end %>
+        <% else %>
+          <%= link_to dislike_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
+              👎 <%= @video.get_dislikes.size %>
+          <% end %>
         <% end %>
+
       </div>
 
     </div>
