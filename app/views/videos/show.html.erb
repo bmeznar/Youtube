@@ -1,36 +1,73 @@
-<p>
-  <strong>Title:</strong>
-  <%= @video.title %>
-</p>
+<div class="container">
 
-<p>
-  <video controls width="640" height="480" src="<%= @video.video %>"></video>
-</p>
+  <!-- Portfolio Item Row -->
+  <div class="row">
 
-<div class="like">
-  <%= link_to like_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
-    <button type="button" name="button">
-      <span class="glyphicon glyphicon-thumbs-up"></span>
-      <span><%= @video.get_likes.size %></span>
-    </button>
-  <% end %>
-  <%= link_to dislike_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
-    <button type="button" name="button">
-      <span class="glyphicon glyphicon-thumbs-down"></span>
-      <span><%= @video.get_dislikes.size %></span>
-    </button>
-  <% end %>
+    <div class="col-md-8">
+      <div class="embed-responsive embed-responsive-16by9">
+         <iframe class="embed-responsive-item" src="<%= @video.video %>" allowfullscreen></iframe>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <h1 class="my-4">
+        <small><%= @video.title %></small>
+      </h1>
+      <h5><%= @video.user.name %></h5>
+      <h4 class="my-3">Description</h4>
+      <p><%= @video.description %></p>
+
+      <div class="like">
+        <%= link_to like_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
+            👍 <%= @video.get_likes.size %>
+        <% end %>
+        <%= link_to dislike_video_path(@video), :class=>"btn btn-outline-secondary", method: :put do %>
+            👎 <%= @video.get_dislikes.size %>
+        <% end %>
+      </div>
+
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+  <!-- Related Projects Row -->
+  <h3 class="my-4">other videos</h3>
+
+  <div class="row">
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+    <div class="col-md-3 col-sm-6 mb-4">
+      <a href="#">
+            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
+          </a>
+    </div>
+
+  </div>
+  <!-- /.row -->
+
+  <div class="row">
+    <%= commontator_thread(@video) %>
+  </div>
+
+  <%= link_to 'Edit', edit_video_path(@video) %> |
+  <%= link_to 'Back', videos_path %>
 </div>
-
-<p>
-  <%= @video.user.name %><br>
-  <strong>Description:</strong>
-  <%= @video.description %>
-</p>
-
-<div class="comments">
-  <%= commontator_thread(@video) %>
-</div>
-
-<%= link_to 'Edit', edit_video_path(@video) %> |
-<%= link_to 'Back', videos_path %>
+<!-- /.container -->
