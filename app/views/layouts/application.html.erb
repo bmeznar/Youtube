@@ -17,17 +17,7 @@
       <%= link_to image_pack_tag('logo.png', class: 'navbar-logo'), root_path, :class=>"navbar-brand" %>
 
       <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo03">
-        <!-- <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-          <li class="nav-item active">
-            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" href="#">Disabled</a>
-          </li>
-        </ul> -->
+
         <form class="form-inline my-2 my-lg-0">
           <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
           <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">🔍</button>
@@ -36,7 +26,7 @@
       </div>
       <div class="btn-group">
         <% if user_signed_in? %>
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <%= current_user.name %>
           <% if current_user.profilePic.attached? %>
             <%= image_tag current_user.profilePic, class: 'profileIMG' %>
@@ -49,24 +39,13 @@
         </div>
         <% else %>
         You are not signed in &nbsp&nbsp
-        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
         <div class="dropdown-menu dropdown-menu-right">
           <%= display_main_navbar_options %>
         </div>
         <% end %>
       </div>
 
-      <%#= if user_signed_in? %>
-        <%#= current_user.name %>
-        <%#= if current_user.profilePic.attached? %>
-          <%#= image_tag current_user.profilePic, class: 'profileIMG' %>
-        <%#= else %>
-          <%#= image_tag "blank_profile.png", class: "profileIMG" %>
-        <%#= end %>
-      <%#= else %>
-        <!--<span>You are not signed in</span>-->
-      <%#= end %>
-      <%#= display_main_navbar_options %>
     </nav>
 
     <p class="notice"><%= notice %></p>
