@@ -26,6 +26,15 @@
     <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
   </div>
 
+  <div class="field">
+    <% if @user.profilePic.attached? %>
+      <%= image_tag @user.profilePic, style: "width: 200px;" %>
+    <% end %>
+
+    <%= f.label :profilePic %>
+    <%= f.file_field :profilePic %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Sign up" %>
   </div>

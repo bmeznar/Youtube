@@ -34,6 +34,8 @@
         </form>
 
       </div>
+      <%= image_tag current_user.profilePic if user_signed_in? if current_user.profilePic.attached?%>
+      <%= current_user.name if user_signed_in? %>
       <%= display_main_navbar_options %>
     </nav>
 
