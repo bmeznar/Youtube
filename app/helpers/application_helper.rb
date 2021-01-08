@@ -1,4 +1,6 @@
 module ApplicationHelper
+
+  #navbar gumbi helper
   def display_main_navbar_options
     capture do
       if user_signed_in?
@@ -15,6 +17,7 @@ module ApplicationHelper
     end
   end
 
+  #like-dislike helper
   def like_dislike
     capture do
       if user_signed_in?
@@ -37,5 +40,19 @@ module ApplicationHelper
       end
     end
   end
+
+  #user display helper
+  #def user_display
+    #if user_signed_in?
+      #concat current_user.name
+      #if current_user.profilePic.attached?
+        #concat image_tag current_user.profilePic, class: 'profileIMG'
+      #else
+        #concat image_tag "blank_profile.png", class: "profileIMG"
+      #end
+    #else
+      #concat "You are not logged in. "
+    #end
+  #end
 
 end

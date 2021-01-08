@@ -34,8 +34,16 @@
         </form>
 
       </div>
-      <%= image_tag current_user.profilePic if user_signed_in? if current_user.profilePic.attached?%>
-      <%= current_user.name if user_signed_in? %>
+      <% if user_signed_in? %>
+        <%= current_user.name %>
+        <% if current_user.profilePic.attached? %>
+          <%= image_tag current_user.profilePic, class: 'profileIMG' %>
+        <% else %>
+          <%= image_tag "blank_profile.png", class: "profileIMG" %>
+        <% end %>
+      <% else %>
+        <span>You are not signed in</span>
+      <% end %>
       <%= display_main_navbar_options %>
     </nav>
 
