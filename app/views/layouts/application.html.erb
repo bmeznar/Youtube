@@ -34,17 +34,39 @@
         </form>
 
       </div>
-      <% if user_signed_in? %>
-        <%= current_user.name %>
-        <% if current_user.profilePic.attached? %>
-          <%= image_tag current_user.profilePic, class: 'profileIMG' %>
+      <div class="btn-group">
+        <% if user_signed_in? %>
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= current_user.name %>
+          <% if current_user.profilePic.attached? %>
+            <%= image_tag current_user.profilePic, class: 'profileIMG' %>
+          <% else %>
+            <%= image_tag "blank_profile.png", class: "profileIMG" %>
+          <% end %>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <%= display_main_navbar_options %>
+        </div>
         <% else %>
-          <%= image_tag "blank_profile.png", class: "profileIMG" %>
+        You are not signed in &nbsp&nbsp
+        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <%= display_main_navbar_options %>
+        </div>
         <% end %>
-      <% else %>
-        <span>You are not signed in</span>
-      <% end %>
-      <%= display_main_navbar_options %>
+      </div>
+
+      <%#= if user_signed_in? %>
+        <%#= current_user.name %>
+        <%#= if current_user.profilePic.attached? %>
+          <%#= image_tag current_user.profilePic, class: 'profileIMG' %>
+        <%#= else %>
+          <%#= image_tag "blank_profile.png", class: "profileIMG" %>
+        <%#= end %>
+      <%#= else %>
+        <!--<span>You are not signed in</span>-->
+      <%#= end %>
+      <%#= display_main_navbar_options %>
     </nav>
 
     <p class="notice"><%= notice %></p>
