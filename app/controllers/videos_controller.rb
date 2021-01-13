@@ -12,6 +12,9 @@ class VideosController < ApplicationController
   # GET /videos/1.json
   def show
     commontator_thread_show(@video)
+    #show subscribe
+    #@user=User.find(params[:id])
+    @subscription=@video.user.subscribers.find_by(subscriber: current_user)
   end
 
   # GET /videos/new

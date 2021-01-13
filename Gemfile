@@ -32,6 +32,9 @@ gem 'acts_as_votable'
 gem 'carrierwave'
 gem 'carrierwave-video'
 
+#simple-form
+gem 'simple_form'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 

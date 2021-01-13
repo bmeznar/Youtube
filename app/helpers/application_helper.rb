@@ -41,6 +41,20 @@ module ApplicationHelper
     end
   end
 
+  def user_subscribe
+    concat @video.user.subscribers.count
+    concat " Subscribers \n"
+    if user_signed_in?
+      if @subscription.present?
+        link_to "Unsubscribe", subscription_path(@subscription.id),class: 'btn btn-outline-secondary', method: :delete
+      else
+        link_to "Subscribe", user_subscriptions_path(@video.user.id),class: 'btn btn-outline-secondary', method: :post
+      end
+    else
+      link_to "Subscribe", new_user_session_path(),class: 'btn btn-outline-secondary'
+    end
+  end
+
   #user display helper
   #def user_display
     #if user_signed_in?
