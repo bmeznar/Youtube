@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :omniauthable, omniauth_providers: %i[facebook google_oauth2]
 
   has_many :videos, dependent: :destroy
 
@@ -28,7 +28,25 @@ class User < ApplicationRecord
     #$geslo=Devise.friendly_token.first(20)
     #create_with(uid: uid, name: full_name, profilePic: avatar_url, password: $geslo, password_confirmation: $geslo).find_or_create_by!(email: email)
   #end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+      if data = session["devise.google_oauth2"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
+  end
+
   def self.from_omniauth(access_token)
+    #where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    #  user.email = auth.info.email
+    #  user.password = Devise.friendly_token[0, 20]
+    #  user.name = auth.info.name
+    #  user.profilePic = auth.info.image
+    #end
     data = access_token.info
     user = User.where(email: data['email']).first
 
@@ -36,12 +54,13 @@ class User < ApplicationRecord
          user = User.create(name: data['name'],
             email: data['email'],
             password: Devise.friendly_token[0,20],
-            profilePic: data['avatar_url'],
-            uid: data['uid']
+            profilePic: data['image'],
+            uid: data['uid'],
+            provider: data['provider']
          )
     end
     user
-end
+  end
 
   #subscriber
   has_many :subscribed_chanels, foreign_key: "subscriber_id", class_name: 'Subscription'

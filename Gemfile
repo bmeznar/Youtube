@@ -32,7 +32,7 @@ gem 'acts_as_votable'
 gem 'carrierwave'
 gem 'carrierwave-video'
 #google login
-gem 'omniauth-github'
+gem 'omniauth-facebook'
 gem 'omniauth-google-oauth2'
 gem "omniauth-rails_csrf_protection"
 

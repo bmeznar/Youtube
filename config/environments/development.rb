@@ -62,6 +62,6 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  ENV['GOOGLE_OAUTH_CLIENT_ID'] = '958083807088-1lqm3j63cporn1hck2qa8ls6lt4g11ia.apps.googleusercontent.com'
-  ENV['GOOGLE_OAUTH_CLIENT_SECRET'] = 'uZkkp5_nnmxgutMXIHCXY06h'
+
+
 end
