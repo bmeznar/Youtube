@@ -5,7 +5,7 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.all
+    @videos = Video.search(params[:search])
   end
 
   # GET /videos/1
@@ -97,6 +97,6 @@ class VideosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def video_params
-      params.require(:video).permit(:title, :video, :description, :thumbnail)
+      params.require(:video).permit(:title, :video, :description, :thumbnail, :search)
     end
 end
