@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   end
 
   resources :subscriptions, only: [:destroy]
+
+  get 'user/myprofile' => 'users#myprofile'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'videos#index'
 end
