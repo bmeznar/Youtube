@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :subscriptions, only: [:destroy]
 
   get 'user/myprofile' => 'users#myprofile'
+  get 'user/user_profile/:id' => 'users#user_profile', as: 'user_user_profile'
   get 'user/subscribers' => 'users#subscribers'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

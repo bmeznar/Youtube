@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+
   def show
     @user=User.find(params[:id])
     @subscription=@user.subscribers.find_by(subscriber: current_user)
@@ -17,6 +18,13 @@ class UsersController < ApplicationController
     @users=User.all
     #@videos=Video.all.where(user_id: [@subscrbed])
     #@subs=@users.where(id: @subscribed.id)
+  end
+
+  def user_profile
+    @user=User.find(params[:id])
+    @videos=@user.videos
+    @subscription=@user.subscribers.find_by(subscriber: current_user)
+    session[:return_to] ||= request.referer
   end
 
 end
