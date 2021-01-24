@@ -5,15 +5,15 @@
         <ul class="list-group">
           <% @subscrbed.each do |subs| %>
             <% if(subs.subscriber_id=current_user.id) %>
-                <li class="list-group-item">
-                  <% @uporabnik=@users.find_by(id: subs.subscribed_to_id) %>
+                <li class="list-group-item" style="vertical-align: middle;">
+                  <h4 style=" margin: 0 auto;"><% @uporabnik=@users.find_by(id: subs.subscribed_to_id) %>
                   <% if @uporabnik.profilePic.attached? %>
-                    <%= image_tag @uporabnik.profilePic, class: "profileIMG" %>
+                    <%= image_tag @uporabnik.profilePic, class: "profilePIC" %>
                   <% else %>
-                    <%= image_tag "blank_profile.png", class: "profileIMG" %>
+                    <%= image_tag "blank_profile.png", class: "profilePIC" %>
                   <% end %>
                   <%= @uporabnik.name %>
-                  <%= link_to "View profile", user_user_profile_path(@uporabnik.id), :class=>"btn btn-primary" %>
+                  <%= link_to "View profile", user_user_profile_path(@uporabnik.id), :class=>"btn btn-primary float-right" %></h4>
                 </li>
             <% end %>
           <% end %>
