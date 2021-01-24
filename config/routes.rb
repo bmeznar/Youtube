@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   resources :subscriptions, only: [:destroy]
 
   get 'user/myprofile' => 'users#myprofile'
+  get 'user/subscribers' => 'users#subscribers'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'videos#index'

@@ -105,7 +105,7 @@
       <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
       <%= link_to "Home", root_path %>
       <% if user_signed_in? %>
-        <%= link_to "Subscribed", new_user_session_path %>
+        <%= link_to "Subscribed", user_subscribers_path %>
         <%= link_to "My Profile", user_myprofile_path %>
         <%= link_to "My Playlist", new_user_session_path %>
       <% else %>

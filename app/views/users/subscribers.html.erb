@@ -1,0 +1,22 @@
+<h3 style="text-align:center;">Subscriptions</h3><br>
+<div class="users">
+    <% if @subscrbed %>
+      <div class="container">
+        <ul class="list-group">
+          <% @subscrbed.each do |subs| %>
+            <% if(subs.subscriber_id=current_user.id) %>
+              <li class="list-group-item">
+                <% @uporabnik=@users.find_by(id: subs.subscribed_to_id) %>
+                <% if @uporabnik.profilePic.attached? %>
+                  <%= image_tag @uporabnik.profilePic, class: "profileIMG" %>
+                <% else %>
+                  <%= image_tag "blank_profile.png", class: "profileIMG" %>
+                <% end %>
+                <%= @uporabnik.name %>
+              </li>
+            <% end %>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+</div>
