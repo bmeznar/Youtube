@@ -29,7 +29,7 @@ module ApplicationHelper
           concat "  "
         end
         if current_user.voted_down_on? @video
-          concat link_to "👍 #{@video.get_likes.size}", dislike_video_path(@video), :class=>"btn btn-secondary", method: :put
+          concat link_to "👎 #{@video.get_dislikes.size}", dislike_video_path(@video), :class=>"btn btn-secondary", method: :put
         else
           concat link_to "👎 #{@video.get_dislikes.size}", dislike_video_path(@video), :class=>"btn btn-outline-secondary", method: :put
         end

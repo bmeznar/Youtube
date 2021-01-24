@@ -1,5 +1,6 @@
 class Video < ApplicationRecord
   belongs_to :user
+  has_many :playlists
 
   def self.search(search)
     if search

@@ -15,6 +15,7 @@ class VideosController < ApplicationController
     #show subscribe
     #@user=User.find(params[:id])
     @subscription=@video.user.subscribers.find_by(subscriber: current_user)
+    @playlist=Playlist.find_by(user_id: current_user.id, video_id: @video.id)
   end
 
   # GET /videos/new

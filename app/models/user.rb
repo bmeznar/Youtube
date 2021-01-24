@@ -62,6 +62,8 @@ class User < ApplicationRecord
     user
   end
 
+  has_many :playlists
+
   #subscriber
   has_many :subscribed_chanels, foreign_key: "subscriber_id", class_name: 'Subscription'
   #has_many :subscribers, through: :subscribed_users

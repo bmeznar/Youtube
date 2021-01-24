@@ -16,6 +16,10 @@ Rails.application.routes.draw do
 
   resources :subscriptions, only: [:destroy]
 
+
+  post '/playlist/add/:id', to: 'playlists#add', as: 'playlist_add'
+  delete '/playlist/remove/:id', to: 'playlists#remove', as: 'playlist_remove'
+
   get 'user/myprofile' => 'users#myprofile'
   get 'user/user_profile/:id' => 'users#user_profile', as: 'user_user_profile'
   get 'user/subscribers' => 'users#subscribers'
