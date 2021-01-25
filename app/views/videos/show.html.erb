@@ -29,7 +29,7 @@
       <div class="like">
         <%= like_dislike %>
       </div>
-<br>
+      <br>
       <% if user_signed_in? %>
         <% if @playlist.present? %>
           <%= link_to "Remove from my playlist", playlist_remove_path(@video.id),class: 'btn btn-outline-secondary', method: :delete %>
@@ -81,8 +81,8 @@
   <div class="row">
     <%= commontator_thread(@video) %>
   </div>
-
-  <%= link_to 'Edit', edit_video_path(@video) %> |
-  <%= link_to 'Back', videos_path %>
+  <br>
+  <%= link_to '< Back', videos_path %>
+  <%= link_to '  |  Edit', edit_video_path(@video) if current_user.id==@video.user.id%>
 </div>
 <!-- /.container -->
