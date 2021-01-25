@@ -80,6 +80,7 @@
   </div>
   <br>
   <%= link_to '< Back', videos_path %>
-  <%= link_to '  |  Edit', edit_video_path(@video) if current_user.id==@video.user.id%>
+  <%= link_to ' Edit ', edit_video_path(@video) if current_user.id==@video.user.id%>
+  <%= link_to ' Delete ', video_delete_path(@video.id), method: :delete if current_user.id==@video.user.id%>
 </div>
 <!-- /.container -->

@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   get 'user/subscribers' => 'users#subscribers'
   get 'user/myplaylist' => 'users#myplaylist'
 
+  delete 'video/:id' => 'videos#destroy', as: 'video_delete'
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'videos#index'
 end
