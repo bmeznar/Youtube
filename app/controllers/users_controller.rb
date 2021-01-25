@@ -25,7 +25,8 @@ class UsersController < ApplicationController
     @user=User.find(params[:id])
     @videos=@user.videos
     @subscription=@user.subscribers.find_by(subscriber: current_user)
-    session[:return_to] ||= request.referer
+    @playlist=Playlist.all.where(user_id: @user.id)
+    #session[:return_to] ||= request.referer
   end
 
   def myplaylist

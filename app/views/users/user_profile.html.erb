@@ -44,18 +44,40 @@
                   <div class="tab-content">
                     <div id="home" class="tab-pane fade in active overflow-auto">
                       <ul class="list-group list-group-flush">
-                        <% @videos.each do |video| %>
-                          <a href="<%= video_path(video.id) %> ">
-                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                              <%= image_tag video.thumbnail, class: 'img-thumbnail h-100 w-25' if video.thumbnail.attached? %>
-                              <p><%= video.title %></p>
-                            </li>
-                          </a>
+                        <% if @videos.any? %>
+                          <% @videos.each do |video| %>
+                            <a href="<%= video_path(video.id) %> ">
+                              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <%= image_tag video.thumbnail, class: 'img-thumbnail h-100 w-25' if video.thumbnail.attached? %>
+                                <p><%= video.title %></p>
+                              </li>
+                            </a>
+                          <% end %>
+                        <% else %>
+                          <div class="" style="margin:0 auto;text-align:center;">
+                            <br>
+                            <h5>You don't have any videos on your playlist yet...</h5>
+                          </div>
                         <% end %>
                       </ul>
                     </div>
                     <div id="menu1" class="tab-pane fade">
-                      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                      <% if @playlist.any? %>
+                        <% @playlist.each do |playlist| %>
+                          <% @ply=Video.all.find_by(id: playlist.video_id) %>
+                          <a href="<%= video_path(@ply.id) %> ">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                              <%= image_tag @ply.thumbnail, class: 'img-thumbnail h-100 w-25' if @ply.thumbnail.attached? %>
+                              <p><%= @ply.title %></p>
+                            </li>
+                          </a>
+                        <% end %>
+                      <% else %>
+                        <div class="" style="margin:0 auto;text-align:center;">
+                          <br>
+                          <h5><%= @user.name %> doesn't have any videos on his/hers playlist yet...</h5>
+                        </div>
+                      <% end %>
                     </div>
                   </div>
 
