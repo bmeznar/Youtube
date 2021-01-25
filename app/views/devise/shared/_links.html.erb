@@ -7,17 +7,22 @@
 
 <%- if controller_name != 'sessions' %>
   <hr>
-  <div class=""style="text-align:center;">
+  <div class="" style="text-align:center;">
     Already have an account? <%= link_to "Log in", new_session_path(resource_name) %><br />
   </div>
 <% end %>
 
-<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
-  <%= link_to "Sign up", new_registration_path(resource_name) %><br />
+<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <hr>
+  <div class="" style="text-align:center;">
+    <%= link_to "I Forgot my password", new_password_path(resource_name) %><br />
+  </div>
 <% end %>
 
-<%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
-  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+  <div class="" style="text-align:center;">
+    Don't have an account yet? <%= link_to "Register", new_registration_path(resource_name) %><br />
+  </div>
 <% end %>
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
