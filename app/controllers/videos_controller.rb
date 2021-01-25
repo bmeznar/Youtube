@@ -16,6 +16,7 @@ class VideosController < ApplicationController
     #@user=User.find(params[:id])
     @subscription=@video.user.subscribers.find_by(subscriber: current_user)
     @playlist=Playlist.find_by(user_id: current_user.id, video_id: @video.id)
+    @rand_videos = Video.where.not(id: @video.id).order('RANDOM()').limit(4)
   end
 
   # GET /videos/new

@@ -51,32 +51,29 @@
 
   <div class="row">
 
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
+      <% @rand_videos.each do |video| %>
 
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <a href="<% video_path(video.id) %>" style="color:black;decoration:none;">
+                  <% if video.thumbnail.attached? %>
+                    <%= image_tag video.thumbnail,  :class=>"img-fluid", :style=>"border:0.5px solid black;width:224px;height:126px;" %>
+                  <% else %>
+                    <%= image_tag "blank_thumb.jpg", :class=>"img-fluid", :style=>"border:0.5px solid black;width:224px;height:126px;" %>
+                  <% end %>
+                  <h5><%= video.title %></h5>
+            </a>
+            <h6>
+              <%= link_to video.user.name, user_path(video.user.id) %></h6>
 
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
-
-    <div class="col-md-3 col-sm-6 mb-4">
-      <a href="#">
-            <img class="img-fluid" src="http://placehold.it/500x300" alt="">
-          </a>
-    </div>
-
+          </div>
+        </div>
+      </div>
+      <% end %>
   </div>
   <!-- /.row -->
+  <hr>
 
   <div class="row">
     <%= commontator_thread(@video) %>
