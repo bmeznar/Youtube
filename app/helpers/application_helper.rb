@@ -4,15 +4,15 @@ module ApplicationHelper
   def display_main_navbar_options
     capture do
       if user_signed_in?
-        concat link_to 'Naloži video', new_video_path, :class=>'dropdown-item'
+        concat link_to 'Upload video', new_video_path, :class=>'dropdown-item'
         concat "    "
-        #concat link_to 'Uredi profil', edit_user_registration, :class=>'dropdown-item'
+        concat link_to "Edit my profile", edit_user_registration_path, :class=>"dropdown-item"
         concat "    "
-        concat link_to "Odjava", destroy_user_session_path, method: :delete, :class=>'dropdown-item'
+        concat link_to "Sign out", destroy_user_session_path, method: :delete, :class=>'dropdown-item'
       else
-        concat link_to "Prijava", new_user_session_path, :class=>'dropdown-item'
+        concat link_to "Sign in", new_user_session_path, :class=>'dropdown-item'
         concat "    "
-        concat link_to "Registracija", new_user_registration_path, :class=>'dropdown-item'
+        concat link_to "Register", new_user_registration_path, :class=>'dropdown-item'
       end
     end
   end

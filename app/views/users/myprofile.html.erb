@@ -19,6 +19,8 @@
                       <h4><%= current_user.name %></h4>
                       <%= current_user.subscribers.count %> Subscribers
                     </div>
+                    <br><br>
+                    <%= link_to "Edit my profile", edit_user_registration_path, :class=>"btn btn-outline-primary" %>
                   </div>
                 </div>
               </div>
