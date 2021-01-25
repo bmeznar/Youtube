@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get 'user/myprofile' => 'users#myprofile'
   get 'user/user_profile/:id' => 'users#user_profile', as: 'user_user_profile'
   get 'user/subscribers' => 'users#subscribers'
+  get 'user/myplaylist' => 'users#myplaylist'
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root to: 'videos#index'

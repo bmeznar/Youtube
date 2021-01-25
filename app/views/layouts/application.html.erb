@@ -107,7 +107,7 @@
       <% if user_signed_in? %>
         <%= link_to "Subscribed", user_subscribers_path %>
         <%= link_to "My Profile", user_myprofile_path %>
-        <%= link_to "My Playlist", new_user_session_path %>
+        <%= link_to "My Playlist", user_myplaylist_path %>
       <% else %>
         <%= link_to "Subscribed", new_user_session_path %>
         <%= link_to "My Profile", new_user_session_path %>

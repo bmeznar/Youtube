@@ -27,4 +27,8 @@ class UsersController < ApplicationController
     session[:return_to] ||= request.referer
   end
 
+  def myplaylist
+    @playlist=Playlist.all.where(user_id: current_user.id)
+  end
+
 end
