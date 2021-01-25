@@ -48,7 +48,12 @@
                           <% @videos.each do |video| %>
                             <a href="<%= video_path(video.id) %> ">
                               <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                <%= image_tag video.thumbnail, class: 'img-thumbnail h-100 w-25' if video.thumbnail.attached? %>
+                                <%#= image_tag video.thumbnail, class: 'img-thumbnail h-100 w-25' if video.thumbnail.attached? %>
+                                <% if video.thumbnail.attached? %>
+                                  <%= image_tag video.thumbnail,  :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                                <% else %>
+                                  <%= image_tag "blank_thumb.jpg", :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                                <% end %>
                                 <p><%= video.title %></p>
                               </li>
                             </a>
@@ -67,7 +72,12 @@
                           <% @ply=Video.all.find_by(id: playlist.video_id) %>
                           <a href="<%= video_path(@ply.id) %> ">
                             <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                              <%= image_tag @ply.thumbnail, class: 'img-thumbnail h-100 w-25' if @ply.thumbnail.attached? %>
+                              <%#= image_tag @ply.thumbnail, class: 'img-thumbnail h-100 w-25' if @ply.thumbnail.attached? %>
+                              <% if @ply.thumbnail.attached? %>
+                                <%= image_tag @ply.thumbnail,  :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                              <% else %>
+                                <%= image_tag "blank_thumb.jpg", :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                              <% end %>
                               <p><%= @ply.title %></p>
                             </li>
                           </a>
