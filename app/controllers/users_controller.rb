@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def myprofile
     @user=current_user.id
     @videos=current_user.videos
+    @playlist=Playlist.all.where(user_id: current_user.id)
   end
 
   def subscribers
