@@ -4,7 +4,7 @@
         <div class="card card-signin my-5">
           <div class="card-body">
             <h5 class="card-title text-center">Log In</h5>
-            <form class="form-signin">
+            <div class="form-signin">
               <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
                 <div class="field form-label-group">
                   <%= f.label :email %><br />
@@ -29,7 +29,7 @@
               <% end %>
               <br>
               <%= render "devise/shared/links" %>
-            </form>
+            </div>
           </div>
         </div>
       </div>
