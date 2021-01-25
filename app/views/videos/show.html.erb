@@ -13,7 +13,14 @@
       <h1 class="my-4">
         <small><%= @video.title %></small>
       </h1>
-      <h5><%= @video.user.name %></h5>
+      <h5>
+        <% if @video.user.profilePic.attached? %>
+          <%= image_tag @video.user.profilePic, :class=>"profileIMG" %>
+        <% else %>
+          <%= image_tag "blank_profile.png", :class=>"profileIMG" %>
+        <% end %>
+        <%= link_to @video.user.name, user_user_profile_path(@video.user.id), :style=>"color:black;decorations:none;" %>
+      </h5>
       <%= user_subscribe %>
 <hr>
       <h4 class="my-3">Description</h4>
