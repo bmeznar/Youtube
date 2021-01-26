@@ -1,0 +1,44 @@
+<tbody>
+  <div class="container" style="Text-align:center;">
+    <h3>My playlist</h3>
+    <br><br>
+  </div>
+  <div class="container">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+      <% if @playlist.any? %>
+        <% @playlist.each do |playlist| %>
+            <% @video=Video.all.find_by(id: playlist.video_id) %>
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <%#= image_tag @video.thumbnail, :class => "card-img-top", style: "width:100%; height:225px;" if @video.thumbnail.attached?%>
+                <% if @video.thumbnail.attached? %>
+                  <%= image_tag @video.thumbnail,  :class=>"card-img-top", :style=>"width:100%; height:225px;" %>
+                <% else %>
+                  <%= image_tag "blank_thumb.jpg", :class=>"card-img-top", :style=>"width:100%; height:225px;" %>
+                <% end %>
+                <div class="card-body">
+                  <p class="card-text" style="font-size:1.3em;"><%= @video.title %></p>
+                  <p class="card-text" style="font-weight:300;"><%= @video.user.name %></p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <%= link_to 'Watch', @video, :class => "btn btn-sm btn-outline-secondary" %>
+                    </div>
+                    <small class="text-muted"><%= time_ago_in_words(@video.created_at) %> ago</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+        <% end %>
+      <% else %>
+        <div class="no_videos" style="width:100%; margin:0 auto; text-align:center;">
+          <h4>You have no videos on your playlist.</h4
+        </div>
+      <% end %>
+    </div>
+  </div>
+      <!-- <td><%#= video.description %></td>
+      <td><%#= link_to 'Show', video %></td>
+      <td><%#= link_to 'Edit', edit_video_path(video) %></td>
+      <td><%#= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
+
+</tbody>

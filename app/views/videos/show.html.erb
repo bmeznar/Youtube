@@ -1,19 +1,91 @@
-<p id="notice"><%= notice %></p>
+<div class="container">
 
-<p>
-  <strong>Title:</strong>
-  <%= @video.title %>
-</p>
+  <!-- Portfolio Item Row -->
+  <div class="row">
 
-<p>
-  <strong>Video:</strong>
-  <%= @video.video %>
-</p>
+    <div class="col-md-8">
+      <div class="embed-responsive embed-responsive-16by9">
+         <iframe class="embed-responsive-item" src="<%= @video.video %>" allowfullscreen></iframe>
+      </div>
+    </div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @video.description %>
-</p>
+    <div class="col-md-4">
+      <h1 class="my-4">
+        <small><%= @video.title %></small>
+      </h1>
+      <h5>
+        <% if @video.user.profilePic.attached? %>
+          <%= image_tag @video.user.profilePic, :class=>"profileIMG" %>
+        <% else %>
+          <%= image_tag "blank_profile.png", :class=>"profileIMG" %>
+        <% end %>
+        <%= link_to @video.user.name, user_user_profile_path(@video.user.id), :style=>"color:black;decorations:none;" %>
+      </h5>
+      <%= user_subscribe %>
+<hr>
+      <h4 class="my-3">Description</h4>
+      <p><%= @video.description %></p>
+      Uploaded at: <%= @video.created_at.to_time.strftime('%d. %m. %Y at %l:%m') %>
+      <br><br>
+      <div class="like">
+        <%= like_dislike %>
+      </div>
+      <br>
+      <% if user_signed_in? %>
+        <% if @playlist.present? %>
+          <%= link_to "Remove from my playlist", playlist_remove_path(@video.id),class: 'btn btn-outline-secondary', method: :delete %>
+        <% else %>
+          <%= link_to "Add to my playlist", playlist_add_path(@video.id),class: 'btn btn-outline-secondary', method: :post %>
+        <% end %>
+      <% else %>
+        <%= link_to "Add to my playlist", new_user_session_path, class: 'btn btn-outline-secondary' %>
+      <% end %>
 
-<%= link_to 'Edit', edit_video_path(@video) %> |
-<%= link_to 'Back', videos_path %>
+    </div>
+
+  </div>
+  <!-- /.row -->
+<br><br>
+<hr>
+  <!-- Related Projects Row -->
+  <h3 class="my-4">Other videos</h3>
+
+  <div class="row">
+
+      <% @rand_videos.each do |video| %>
+
+      <div class="col-sm-3">
+        <div class="card">
+          <div class="card-body">
+            <a href="<% video_path(video.id) %>" style="color:black;decoration:none;">
+                  <% if video.thumbnail.attached? %>
+                    <%= image_tag video.thumbnail,  :class=>"img-fluid", :style=>"border:0.5px solid black;width:224px;height:126px;" %>
+                  <% else %>
+                    <%= image_tag "blank_thumb.jpg", :class=>"img-fluid", :style=>"border:0.5px solid black;width:224px;height:126px;" %>
+                  <% end %>
+                  <h5><%= video.title %></h5>
+            </a>
+            <h6>
+              <%= link_to video.user.name, user_path(video.user.id) %></h6>
+
+          </div>
+        </div>
+      </div>
+      <% end %>
+  </div>
+  <!-- /.row -->
+  <hr>
+
+  <div class="row">
+    <%= commontator_thread(@video) %>
+  </div>
+  <br>
+  <%= link_to '< Back', videos_path %>
+  <% if user_signed_in? %>
+    <% if current_user.id==@video.user.id %>
+      <%= link_to ' Edit ', edit_video_path(@video) %>
+      <%= link_to ' Delete ', video_delete_path(@video.id), method: :delete %>
+    <% end %>
+  <% end %>
+</div>
+<!-- /.container -->

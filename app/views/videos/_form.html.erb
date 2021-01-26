@@ -1,32 +1,55 @@
-<%= form_with(model: video, local: true) do |form| %>
-  <% if video.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(video.errors.count, "error") %> prohibited this video from being saved:</h2>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <div class="form-signin">
+              <%= form_with(model: video, local: true) do |form| %>
+                <% if video.errors.any? %>
+                  <div id="error_explanation">
+                    <h2><%= pluralize(video.errors.count, "error") %> prohibited this video from being saved:</h2>
 
-      <ul>
-        <% video.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
+                    <ul>
+                      <% video.errors.full_messages.each do |message| %>
+                        <li><%= message %></li>
+                      <% end %>
+                    </ul>
+                  </div>
+                <% end %>
+                <br>
+                <div class="field form-label-group">
+                  <%= form.label :title %>
+                  <%= form.text_field :title, :class=>"form-control" %>
+                </div>
+                <br>
+                <div class="field form-label-group">
+                  <%= form.label :video %><br>
+                  <%= form.file_field :video, id: :video_file, :class=>"form-control" %>
+                </div>
+                <br>
+                <div class="field form-label-group">
+                  <%= form.label :thumbnail %><br>
+                  <% if video.thumbnail.attached? %>
+                    <%= image_tag video.thumbnail, style: "width: 200px;" %>
+                  <% end %>
+
+                  <%= form.file_field :thumbnail, :class=>"form-control" %>
+                </div>
+                <br>
+                <div class="field form-label-group">
+                  <%= form.label :description %>
+                  <%= form.text_area :description, :class=>"form-control" %>
+                </div>
+                <br>
+                <div class="actions form-label-group">
+                  <%= form.submit "Upload video", :class=>"btn btn-lg btn-primary btn-block text-uppercase" %>
+                </div>
+                <br>
+                <%= link_to "Cancel", root_path, :class=>"btn btn-outline-danger btn-block text-uppercase" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
   </div>
-
-  <div class="field">
-    <%= form.label :video %>
-    <%= form.text_field :video %>
-  </div>
-
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
-  </div>
-<% end %>

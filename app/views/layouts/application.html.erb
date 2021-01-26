@@ -1,15 +1,133 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Youtube</title>
+    <title>MyTube</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <style>
+        .flash__alert   { color: red; }
+        .flash__notice  { color: blue; }
+        .flash__success { color: green; }
+    </style>
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+        height:100vh;
+      }
+      .sidenav {
+        height: 100%;
+        width: 0;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background-color: #e6e6e6;
+        overflow-x: hidden;
+        transition: 0.5s;
+        padding-top: 60px;
+      }
+      .sidenav a {
+        padding: 8px 8px 8px 32px;
+        text-decoration: none;
+        font-size: 25px;
+        color: #818181;
+        display: block;
+        transition: 0.3s;
+      }
+      .sidenav a:hover {
+        color: #f1f1f1;
+      }
+      .sidenav .closebtn {
+        position: absolute;
+        top: 0;
+        right: 25px;
+        font-size: 36px;
+        margin-left: 50px;
+      }
+      @media screen and (max-height: 450px) {
+        .sidenav {padding-top: 15px;}
+        .sidenav a {font-size: 18px;}
+      }
+      
+      </style>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
 
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <span style="font-size:30px;cursor:pointer; padding-right:30px;" onclick="openNav()">&#9776;</span>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <%= link_to image_pack_tag('logo.png', class: 'navbar-logo'), root_path, :class=>"navbar-brand" %>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarTogglerDemo03">
+
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">🔍</button>
+        </form> -->
+        <%= form_tag(videos_path,method: :get, :class=>"form-inline my-2 my-lg-0") do %>
+          <%= text_field_tag(:search, params[:search], :class=>"form-control mr-sm-2") %>
+          <%= submit_tag("🔍", :class=>"btn btn-outline-secondary my-2 my-sm-0", :name=>nil) %>
+        <% end %>
+
+      </div>
+      <div class="btn-group">
+        <% if user_signed_in? %>
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <%= current_user.name %>
+          <% if current_user.profilePic.attached? %>
+            <%= image_tag current_user.profilePic, class: 'profileIMG' %>
+          <% else %>
+            <%= image_tag "blank_profile.png", class: "profileIMG" %>
+          <% end %>
+        </button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <%= display_main_navbar_options %>
+        </div>
+        <% else %>
+        You are not signed in &nbsp&nbsp
+        <button type="button" class="btn btn-outline-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu dropdown-menu-right">
+          <%= display_main_navbar_options %>
+        </div>
+        <% end %>
+      </div>
+
+    </nav>
+
+
+    <div id="mySidenav" class="sidenav">
+      <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+      <%= link_to "Home", root_path %>
+      <% if user_signed_in? %>
+        <%= link_to "Subscribed", user_subscribers_path %>
+        <%= link_to "My Profile", user_myprofile_path %>
+        <%= link_to "My Playlist", user_myplaylist_path %>
+      <% else %>
+        <%= link_to "Subscribed", new_user_session_path %>
+        <%= link_to "My Profile", new_user_session_path %>
+        <%= link_to "My Playlist", new_user_session_path %>
+      <% end %>
+    </div>
+
+    <p class="notice"><%= notice %></p>
+    <p class="alert"><%= alert %></p>
     <%= yield %>
+
+    <script>
+      function openNav() {
+        document.getElementById("mySidenav").style.width = "250px";
+      }
+
+      function closeNav() {
+        document.getElementById("mySidenav").style.width = "0";
+      }
+      </script>
   </body>
 </html>

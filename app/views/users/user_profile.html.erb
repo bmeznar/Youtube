@@ -1,0 +1,101 @@
+<div class="outter-container">
+
+  <div class="container">
+    <div class="main-body">
+
+          <!-- /Breadcrumb -->
+
+          <div class="row gutters-sm" style="height:100%;">
+            <div class="col-md-4 mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="d-flex flex-column align-items-center text-center">
+                    <% if @user.profilePic.attached? %>
+                      <%= image_tag @user.profilePic, class: 'rounded-circle' , width: "150"%>
+                    <% else %>
+                      <%= image_tag "blank_profile.png", class: "rounded-circle" , width: "150" %>
+                    <% end %>
+                    <div class="mt-3">
+                      <h4><%= @user.name %></h4>
+                      <% if user_signed_in? %>
+                        <% if @subscription.present? %>
+                          <%= link_to "Unsubscribe", subscription_path(@subscription.id),class: 'btn btn-outline-secondary', method: :delete %>
+                        <% else %>
+                          <%= link_to "Subscribe", user_subscriptions_path(@user.id),class: 'btn btn-outline-secondary', method: :post %>
+                        <% end %>
+                      <% else %>
+                        <%= link_to "Subscribe", new_user_session_path(),class: 'btn btn-outline-secondary' %>
+                      <% end %>
+                      <%= @user.subscribers.count %> Subscribers
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+
+                  <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home" class="nav-link">Videos</a></li>
+                    <li><a data-toggle="tab" href="#menu1" class="nav-link"><%= @user.name %>'s Playlist</a></li>
+                  </ul>
+
+                  <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active overflow-auto">
+                      <ul class="list-group list-group-flush">
+                        <% if @videos.any? %>
+                          <% @videos.each do |video| %>
+                            <a href="<%= video_path(video.id) %> ">
+                              <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                                <%#= image_tag video.thumbnail, class: 'img-thumbnail h-100 w-25' if video.thumbnail.attached? %>
+                                <% if video.thumbnail.attached? %>
+                                  <%= image_tag video.thumbnail,  :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                                <% else %>
+                                  <%= image_tag "blank_thumb.jpg", :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                                <% end %>
+                                <p><%= video.title %></p>
+                              </li>
+                            </a>
+                          <% end %>
+                        <% else %>
+                          <div class="" style="margin:0 auto;text-align:center;">
+                            <br>
+                            <h5>User hasn't uploaded any videos yet...</h5>
+                          </div>
+                        <% end %>
+                      </ul>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+                      <% if @playlist.any? %>
+                        <% @playlist.each do |playlist| %>
+                          <% @ply=Video.all.find_by(id: playlist.video_id) %>
+                          <a href="<%= video_path(@ply.id) %> ">
+                            <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
+                              <%#= image_tag @ply.thumbnail, class: 'img-thumbnail h-100 w-25' if @ply.thumbnail.attached? %>
+                              <% if @ply.thumbnail.attached? %>
+                                <%= image_tag @ply.thumbnail,  :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                              <% else %>
+                                <%= image_tag "blank_thumb.jpg", :class=>"img-thumbnail h-100 w-25", :style=>"width:100%; height:130px;" %>
+                              <% end %>
+                              <p><%= @ply.title %></p>
+                            </li>
+                          </a>
+                        <% end %>
+                      <% else %>
+                        <div class="" style="margin:0 auto;text-align:center;">
+                          <br>
+                          <h5><%= @user.name %> doesn't have any videos on his/hers playlist yet...</h5>
+                        </div>
+                      <% end %>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+</div>
