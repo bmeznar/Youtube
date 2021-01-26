@@ -25,7 +25,8 @@
 <hr>
       <h4 class="my-3">Description</h4>
       <p><%= @video.description %></p>
-
+      Uploaded at: <%= @video.created_at.to_time.strftime('%d. %m. %Y at %l:%m') %>
+      <br><br>
       <div class="like">
         <%= like_dislike %>
       </div>
@@ -80,7 +81,11 @@
   </div>
   <br>
   <%= link_to '< Back', videos_path %>
-  <%= link_to ' Edit ', edit_video_path(@video) if current_user.id==@video.user.id%>
-  <%= link_to ' Delete ', video_delete_path(@video.id), method: :delete if current_user.id==@video.user.id%>
+  <% if user_signed_in? %>
+    <% if current_user.id==@video.user.id %>
+      <%= link_to ' Edit ', edit_video_path(@video) %>
+      <%= link_to ' Delete ', video_delete_path(@video.id), method: :delete %>
+    <% end %>
+  <% end %>
 </div>
 <!-- /.container -->
