@@ -273,14 +273,14 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   #config.omniauth :google_oauth2, ENV['GOOGLE_OAUTH_CLIENT_ID'], ENV['GOOGLE_OAUTH_CLIENT_SECRET']
-  google_client_id = Rails.application.credentials.google_oauth2[:client_id]
-  google_client_secret = Rails.application.credentials.google_oauth2[:client_secret]
-  config.omniauth :google_oauth2, google_client_id, google_client_secret, scope: 'userinfo.email,userinfo.profile', skip_jwt: true
+  #google_client_id = Rails.application.credentials.google_oauth2[:client_id]
+  #google_client_secret = Rails.application.credentials.google_oauth2[:client_secret]
+  config.omniauth :google_oauth2, ENV['GOOGLE_KEY'], ENV['GOOGLE_SECRET']
   #config.omniauth :facebook, "APP_ID", "APP_SECRET"
   #config.omniauth :facebook, ENV['FB_OAUTH_CLIENT_ID'], ENV['FB_OAUTH_CLIENT_SECRET']
-  fb_client_id = Rails.application.credentials.facebook_oauth[:client_id]
-  fb_client_secret = Rails.application.credentials.facebook_oauth[:client_secret]
-  config.omniauth :facebook, fb_client_id, fb_client_secret, scope: 'userinfo.email,userinfo.profile', skip_jwt: true
+  #fb_client_id = Rails.application.credentials.facebook_oauth[:client_id]
+  #fb_client_secret = Rails.application.credentials.facebook_oauth[:client_secret]
+  config.omniauth :facebook, ENV['FACEBOOK_KEY'], ENV['FACEBOOK_SECRET']
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
