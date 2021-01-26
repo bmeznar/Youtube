@@ -34,6 +34,18 @@ ActiveRecord::Schema.define(version: 2021_01_24_171243) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "videos", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "video"
+    t.integer "user_id"
+    t.string "thumbnail"
+    t.index ["user_id"], name: "index_videos_on_user_id"
+  end
+
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -134,18 +146,6 @@ ActiveRecord::Schema.define(version: 2021_01_24_171243) do
   create_table "subscriptions", force: :cascade do |t|
     t.integer "subscriber_id", null: false
     t.integer "subscribed_to_id", null: false
-  end
-
-  create_table "videos", force: :cascade do |t|
-    t.string "title"
-    t.string "link"
-    t.string "description"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "video"
-    t.integer "user_id"
-    t.string "thumbnail"
-    t.index ["user_id"], name: "index_videos_on_user_id"
   end
 
   create_table "votes", force: :cascade do |t|
