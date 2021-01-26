@@ -17,7 +17,7 @@ class UsersController < ApplicationController
     #@subscrbed=User.joins("INNER JOIN subscriptions ON subscriber_id=#{current_user.id}")
     @subscrbed=Subscription.all.where(subscriber_id: current_user.id)
     @users=User.all
-    #@videos=Video.all.where(user_id: [@subscrbed])
+    #@videos=Video.all
     #@subs=@users.where(id: @subscribed.id)
   end
 
