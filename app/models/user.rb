@@ -62,7 +62,7 @@ class User < ApplicationRecord
     user
   end
 
-  has_many :playlists
+  has_many :playlists, :dependent => :destroy
 
   #subscriber
   has_many :subscribed_chanels, foreign_key: "subscriber_id", class_name: 'Subscription'
