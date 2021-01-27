@@ -61,6 +61,7 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'dotenv-rails', '~> 2.7'
+  gem 'dotenv'
 end
 
 group :test do

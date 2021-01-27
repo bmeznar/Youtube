@@ -291,6 +291,7 @@ DEPENDENCIES
   carrierwave-video
   commontator
   devise!
+  dotenv
   dotenv-rails (~> 2.7)
   jbuilder (~> 2.7)
   listen (~> 3.2)

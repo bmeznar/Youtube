@@ -29,6 +29,17 @@ class User < ApplicationRecord
     #create_with(uid: uid, name: full_name, profilePic: avatar_url, password: $geslo, password_confirmation: $geslo).find_or_create_by!(email: email)
   #end
 
+  #def self.new_with_session(params, session)
+  #  super.tap do |user|
+  #    if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+  #      user.email = data["email"] if user.email.blank?
+  #    end
+  #    if data = session["devise.google_oauth2"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
+  #      user.email = data["email"] if user.email.blank?
+  #    end
+  #  end
+  #end
+
   def self.new_with_session(params, session)
     super.tap do |user|
       if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
@@ -75,17 +86,17 @@ class User < ApplicationRecord
       user.email = provider_data.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = provider_data.info.name   # assuming the user model has a name
-      user.icon_url = provider_data.info.image
+      #user.profilePic = provider_data.info.image
     end
   end
 
-  def self.create_from_provider_data(provider_data)
-    where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
-      user.email = provider_data.info.email
-      user.password = Devise.friendly_token[0, 20]
-      user.skip_confirmation!
-    end
-  end
+  #def self.create_from_provider_data(provider_data)
+  #  where(provider: provider_data.provider, uid: provider_data.uid).first_or_create do | user |
+  #    user.email = provider_data.info.email
+  #    user.password = Devise.friendly_token[0, 20]
+  #    user.skip_confirmation!
+  #  end
+  #end
 
   has_many :playlists, :dependent => :destroy
 
