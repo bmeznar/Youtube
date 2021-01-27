@@ -1,7 +1,7 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_oauth2
-    @user = User.create_from_google_data(request.env['omniauth.auth'])
+    @user = User.from_omniauth(request.env['omniauth.auth'])
     if @user.persisted?
       sign_in_and_redirect @user
       set_flash_message(:notice, :success, kind: 'Google') if is_navigational_format?
@@ -12,7 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def facebook
-     @user = User.create_from_provider_data(request.env['omniauth.auth'])
+     @user = User.from_omniauth(request.env['omniauth.auth'])
      if @user.persisted?
        sign_in_and_redirect @user
        set_flash_message(:notice, :success, kind: 'Facebook') if is_navigational_format?
@@ -23,7 +23,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    lash[:error] = 'There was a problem signing you in. Please register or try signing in later.' 
+    lash[:error] = 'There was a problem signing you in. Please register or try signing in later.'
     redirect_to root_path
   end
 
