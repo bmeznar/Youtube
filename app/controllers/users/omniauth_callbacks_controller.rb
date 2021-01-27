@@ -23,7 +23,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def failure
-    lash[:error] = 'There was a problem signing you in. Please register or try signing in later.'
+    flash[:error] = 'There was a problem signing you in. Please register or try signing in later.'
     redirect_to root_path
   end
 
