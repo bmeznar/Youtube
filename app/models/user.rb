@@ -40,36 +40,36 @@ class User < ApplicationRecord
     end
   end
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name   # assuming the user model has a name
-      user.profilePic = auth.info.image
-    end
-  end
+  #def self.from_omniauth(auth)
+  #  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+  #    user.email = auth.info.email
+  #    user.password = Devise.friendly_token[0,20]
+  #    user.name = auth.info.name   # assuming the user model has a name
+  #    user.profilePic = auth.info.image
+  #  end
+  #end
 
-  #def self.from_omniauth(access_token)
+  def self.from_omniauth(access_token)
     #where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     #  user.email = auth.info.email
     #  user.password = Devise.friendly_token[0, 20]
     #  user.name = auth.info.name
     #  user.profilePic = auth.info.image
     #end
-    #data = access_token.info
-    #user = User.where(email: data['email']).first
+    data = access_token.info
+    user = User.where(email: data['email']).first
 
-    #unless user
-    #     user = User.create(name: data['name'],
-    #        email: data['email'],
-    #        password: Devise.friendly_token[0,20],
-    #        profilePic: data['image'],
-    #        uid: data['uid'],
-    #        provider: data['provider']
-    #     )
-    #end
-    #user
-  #end
+    unless user
+         user = User.create(name: data['name'],
+            email: data['email'],
+            password: Devise.friendly_token[0,20],
+            profilePic: data['image'],
+            uid: data['uid'],
+            provider: data['provider']
+         )
+    end
+    user
+  end
 
   has_many :playlists, :dependent => :destroy
 
