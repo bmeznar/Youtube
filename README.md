@@ -1,24 +1,20 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Simple Youtube clone webpage made on Ruby on Rails for school project.
 
-Things you may want to cover:
+It has user authorization with devise and also includes Google and Facebook login.
 
-* Ruby version
+  - If user is not signed in he can only watch and browse videos.
+  - Signed in user has options to subscribe to different users, like or dislike videos(acts_as_votable gem) , comment on them (commontator gem) and add them on their playlist. User alo has an option to upload videos.
 
-* System dependencies
+Each loged in user can edit their own profile and upload their profile photo.
 
-* Configuration
+Uploading videos (carrierwave-video gem) and uploading its thumbnail (active storage), video description and title.
 
-* Database creation
+User can subscribe to many others and many others can subscribe to that user. For each user you can see how many subscribers he has.
 
-* Database initialization
+Main pages are home which displays all videos, subscriptions which displays all users you are subscribed to, my profile which displays my profile, my videos and last my playlist, where you can see all the videos you have added to your playlist. 
 
-* How to run the test suite
+User profile displays users profile picture, name and subscriber count, all his videos and videos on his playlist.
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+App is compatable with heroku hosting.
